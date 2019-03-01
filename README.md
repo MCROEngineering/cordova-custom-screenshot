@@ -1,26 +1,31 @@
-cordova-screenshot
+cordova-custom-screenshot
 ==================
 
-[![NPM version](http://img.shields.io/npm/v/com.darktalker.cordova.screenshot.svg?style=flat)](https://www.npmjs.com/package/com.darktalker.cordova.screenshot)
 
-
-The Screenshot plugin allows your application to take screenshots of the current screen and save them into the phone.
+The Screenshot plugin allows your application to take custom screenshots of the current screen and save them into the 
+phone.
 
 ## how to install
 
 install it via cordova cli
 
 ```
-cordova plugin add https://github.com/gitawego/cordova-screenshot.git
+cordova plugin add https://github.com/MCROEngineering/cordova-custom-screenshot.git
 ```
 
 notice:
 in iOS, only jpg format is supported
-in Android, the default WebView and [Crosswalk](https://crosswalk-project.org/documentation/cordova.html) are both supported
+in Android
+## Usage
+### Frame Usage
 
-## usage
+```js
+const screenShotFrame = navigator.screenshot.getFrame(400, 200, 50, 50);
+screenShotFrame.showScreenShotModal();
+```
 
 
+### Simple Usage
 ```js
 navigator.screenshot.save(function(error,res){
   if(error){
@@ -66,32 +71,6 @@ navigator.screenshot.URI(function(error,res){
 },50);
 ```
 
-## usage in AngularJS
-
-```js
-.service('$cordovaScreenshot', ['$q', function ($q){
-	return {
-		capture: function (filename, extension, quality){
-			extension = extension || 'jpg';
-			quality = quality || '100';
-
-			var defer = $q.defer();
-			
-			navigator.screenshot.save(function (error, res){
-				if (error) {
-					console.error(error);
-					defer.reject(error);
-				} else {
-					console.log('screenshot saved in: ', res.filePath);
-					defer.resolve(res.filePath);
-				}
-			}, extension, quality, filename);
-			
-			return defer.promise;
-		}
-	};
-}])
-```
 
 ## Known Issue
 ### in Android platform I receive the black image with crosswalk 
