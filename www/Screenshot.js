@@ -6,40 +6,31 @@ const ScreenShotFrame  = require('./ScreenShotFrame');
 const formats = ['png','jpg'];
 
 module.exports = {
-	getFrame: function() {
-		return ScreenShotFrame.apply(this, arguments);
-	},
-	save:function(callback,format,quality, filename) {
-		format = (format || 'png').toLowerCase();
-		filename = filename || 'screenshot_'+Math.round((+(new Date()) + Math.random()));
-		if(formats.indexOf(format) === -1){
-			return callback && callback(new Error('invalid format '+format));
-		}
-		quality = typeof(quality) !== 'number'?100:quality;
-		exec(function(res){
-			callback && callback(null,res);
-		}, function(error){
-			callback && callback(error);
-		}, "Screenshot", "saveScreenshot", [format, quality, filename]);
-	},
+  getFrame: function() {
+    return ScreenShotFrame.apply(this, arguments);
+  },
 
-	URI:function(callback, quality){
-		quality = typeof(quality) !== 'number'?100:quality;
-		exec(function(res){
-			callback && callback(null, res);
-		}, function(error){
-			callback && callback(error);
-		}, "Screenshot", "getScreenshotAsURI", [quality]);
+  save:function(callback, options) {
+    var format = (options.format || 'png').toLowerCase();
+    options.filename = options.filename || 'screenshot_'+Math.round((+(new Date()) + Math.random()));
+    if(formats.indexOf(format) === -1){
+      return callback && callback(new Error('invalid format '+format));
+    }
+    options.quality = typeof(options.quality) !== 'number'?100:options.quality;
+    exec(function(res){
+      callback && callback(null,res);
+    }, function(error){
+      callback && callback(error);
+    }, "Screenshot", "saveScreenshot", [options]);
+  },
 
-	},
+  URI:function(callback, options){
+    options.quality = typeof(options.quality) !== 'number'?100:options.quality;
+    exec(function(res){
+      callback && callback(null, res);
+    }, function(error){
+      callback && callback(error);
+    }, "Screenshot", "getScreenshotAsURI", [options]);
 
-	URISync:function(callback,quality){
-		var method = navigator.userAgent.indexOf("Android") > -1 ? "getScreenshotAsURISync" : "getScreenshotAsURI";
-		quality = typeof(quality) !== 'number'?100:quality;
-		exec(function(res){
-			callback && callback(null,res);
-		}, function(error){
-			callback && callback(error);
-		}, "Screenshot", method, [quality]);
-	}
+  }
 };

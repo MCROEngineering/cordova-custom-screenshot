@@ -15,14 +15,14 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Screenshot">
-                <param name="android-package" value="com.darktalker.cordova.screenshot.Screenshot"/>
+                <param name="android-package" value="tech.mcro.cordova.screenshot"/>
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
         </config-file>
-        <source-file src="src/android/Screenshot.java" target-dir="src/com/darktalker/cordova/screenshot"/>
-        <source-file src="src/android/PermissionHelper.java" target-dir="src/com/darktalker/cordova/screenshot"/>
+        <source-file src="src/android/Screenshot.java" target-dir="src/tech/mcro/cordova/screenshot"/>
+        <source-file src="src/android/PermissionHelper.java" target-dir="src/tech/mcro/cordova/screenshot"/>
     </platform>
     <!-- ios -->
     <platform name="ios">
