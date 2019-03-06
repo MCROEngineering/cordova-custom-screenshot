@@ -9,8 +9,7 @@
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
     <js-module src="www/Screenshot.js" name="screenshot">
-        <runs />
-        <clobbers target="ScreenshotPlugin"/>
+        <merges target="navigator.screenshot"/>
     </js-module>
     <!-- android -->
     <platform name="android">
