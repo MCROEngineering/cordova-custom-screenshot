@@ -56,12 +56,16 @@ CGFloat statusBarHeight()
     NSDictionary *json = [command.arguments objectAtIndex:0];
     NSString *filename = [json objectForKey:@"filename"];
     NSNumber *quality = [json objectForKey:@"quality"];
-    NSString *imageFrame = [json objectForKey:@"frame"];
+    NSDictionary *imageFrame = [json objectForKey:@"frame"];
 
     CGRect imageRect;
     if (imageFrame) {
-        NSArray *frameParams = [imageFrame componentsSeparatedByString:@" "];
-        imageRect = CGRectMake([[frameParams objectAtIndex:0] integerValue], [[frameParams objectAtIndex:1] integerValue], [[frameParams objectAtIndex:2] integerValue], [[frameParams objectAtIndex:3] integerValue]);
+        CGFloat widthFrame = [[imageFrame objectForKey:@"width"] floatValue];
+        CGFloat heightFrame = [[imageFrame objectForKey:@"height"] floatValue];
+        CGFloat xOffset = [[imageFrame objectForKey:@"x"] floatValue];
+        CGFloat yOffset = [[imageFrame objectForKey:@"y"] floatValue];
+        
+        imageRect = CGRectMake(xOffset, yOffset, widthFrame, heightFrame);
     } else {
         imageRect = [self getDefaultFrame];
     }
@@ -90,12 +94,16 @@ CGFloat statusBarHeight()
 {
     NSDictionary *json = [command.arguments objectAtIndex:0];
     NSNumber *quality = [json objectForKey:@"quality"];
-    NSString *imageFrame = [json objectForKey:@"frame"];
+    NSDictionary *imageFrame = [json objectForKey:@"frame"];
 
     CGRect imageRect;
     if (imageFrame) {
-        NSArray *frameParams = [imageFrame componentsSeparatedByString:@" "];
-        imageRect = CGRectMake([[frameParams objectAtIndex:0] integerValue], [[frameParams objectAtIndex:1] integerValue], [[frameParams objectAtIndex:2] integerValue], [[frameParams objectAtIndex:3] integerValue]);
+        CGFloat widthFrame = [[imageFrame objectForKey:@"width"] floatValue];
+        CGFloat heightFrame = [[imageFrame objectForKey:@"height"] floatValue];
+        CGFloat xOffset = [[imageFrame objectForKey:@"x"] floatValue];
+        CGFloat yOffset = [[imageFrame objectForKey:@"y"] floatValue];
+        
+        imageRect = CGRectMake(xOffset, yOffset, widthFrame, heightFrame);
     } else {
         imageRect = [self getDefaultFrame];
     }
