@@ -20,39 +20,44 @@ in Android
 ### Frame Usage
 
 ```js
-const screenShotFrame = navigator.screenshot.getFrame(400, 200, 50, 50);
-screenShotFrame.showScreenShotModal();
+navigator.screenshot.getFrame({ width: 400, height: 200, x: 50, y: 50, filename: 'MyShotName' },  (res)=> {
+  if (error) {
+      console.error(error);
+    } else {
+      console.log('File path: ',res.filePath);
+    }
+});
 ```
 
 
 ### Simple Usage
 ```js
-navigator.screenshot.save(function(error,res){
-  if(error){
+navigator.screenshot.save((error, res) => {
+  if (error) {
     console.error(error);
-  }else{
-    console.log('ok',res.filePath);
+  } else {
+    console.log('File Path = ',res.filePath);
   }
 });
 ```
 take screenshot with jpg and custom quality
 ```js
-navigator.screenshot.save(function(error,res){
-  if(error){
+navigator.screenshot.save((error, res) => {
+  if (error) {
     console.error(error);
-  }else{
-    console.log('ok',res.filePath);
+  } else {
+    console.log('File Path =  = ',res.filePath);
   }
 },'jpg',50);
 ```
 
 define a filename
 ```js
-navigator.screenshot.save(function(error,res){
-  if(error){
+navigator.screenshot.save((error, res) => {
+  if (error) {
     console.error(error);
-  }else{
-    console.log('ok',res.filePath); //should be path/to/myScreenshot.jpg
+  } else {
+    console.log('File Path = ',res.filePath); //should be path/to/myScreenshot.jpg
   }
 },'jpg',50,'myScreenShot');
 ```
@@ -61,10 +66,10 @@ screenshot files are stored in /sdcard/Pictures for android.
 
 take screenshot and get it as Data URI
 ```js
-navigator.screenshot.URI(function(error,res){
-  if(error){
+navigator.screenshot.URI((error, res) => {
+  if (error) {
     console.error(error);
-  }else{
+  } else {
     html = '<img style="width:50%;" src="'+res.URI+'">';
     document.body.innerHTML = html;
   }

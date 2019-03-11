@@ -1,20 +1,21 @@
 module.exports = {
   getFrame: function (callback, options) {
-    const width = options.width;
-    const height = options.height;
-    const x = options.x;
-    const y = options.y;
+    if (!options || typeof options !== 'object') {
+      console.error('Plugin: options needs to be an object of type {width, height, x, y} and it is mandatory');
+    }
+    const width = options.width || 200;
+    const height = options.height || 200;
+    const x = options.x || 0;
+    const y = options.y || 0;
     const fileName = options.fileName || 'screenshotName' + parseInt(Math.random() * 1000, 10);
 
-    const shooter = this; // should take the scope of the bound element
-
     const modalId = 'screenshot-modal';
-    const widthFrame = width || 400;
-    const heightFrame = height || 400;
+    const widthFrame = width;
+    const heightFrame = height;
     const quality = options.quality || 100;
 
-    let xOffset = x || 200;
-    let yOffset = y || 200;
+    let xOffset = x || 50;
+    let yOffset = y || 50;
 
     return {
 
