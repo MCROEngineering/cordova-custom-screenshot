@@ -1,20 +1,19 @@
-cordova-custom-screenshot
+Cordova Custom Screenshot
 ==================
 
 
 The Screenshot plugin allows your application to take custom screenshots of the current screen and save them into the 
-phone.
+phone. You can also drag the screenshot box and setup a custom size for it using getFrame.
 
-## how to install
+## How to install
 
 install it via cordova cli
 
 ```
-cordova plugin add https://github.com/MCROEngineering/cordova-custom-screenshot.git
+cordova plugin add cordova-custom-screenshot
 ```
 
-notice:
-in iOS, only jpg format is supported
+notice: only jpg format is supported
 in Android
 ## Usage
 ### Frame Usage
@@ -86,4 +85,4 @@ add this line ``<preference name="CrosswalkAnimatable" value="true" />`` in conf
 
 License
 =========
-this repo uses the MIT license
+MIT license
