@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
-        id="tech.mcro.cordova.screenshot"
+        id="cordova-custom-screenshot"
         version="0.0.1"
         xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>tech.mcro.cordova.screenshot</name>
+    <name>Custom Screenshot</name>
     <description>Custom Screenshot Tool for Corodova and Phonegap</description>
     <license>MIT</license>
     <keywords>cordova,screenshot, custom screenshot, ecosystem:cordova,cordova-android,cordova-ios</keywords>

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Screenshot custom for Crodova & Phonegap",
   "cordova": {
-    "id": "tech.mcro.cordova.screenshot",
+    "id": "cordova-custom-screenshot",
     "platforms": [
       "android",
       "ios"
