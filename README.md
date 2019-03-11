@@ -20,7 +20,7 @@ in Android
 ### Frame Usage
 
 ```js
-navigator.screenshot.getFrame({ width: 400, height: 200, x: 50, y: 50, filename: 'MyShotName' },  (res)=> {
+navigator.screenshot.getFrame({ width: 400, height: 200, x: 50, y: 50 },  (error, res)=> {
   if (error) {
       console.error(error);
     } else {
