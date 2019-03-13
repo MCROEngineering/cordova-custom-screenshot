@@ -7,11 +7,13 @@ const formats = ['png', 'jpg'];
 
 module.exports = {
   getFrame: function (options, callback) {
-    return ScreenShotFrame.getFrame((updatedOptions) => {
-      this.save(callback, updatedOptions);
-    }, options || {}).showScreenShotModal();
+    var that = this;
+    return ScreenShotFrame.getFrame(options, function(updatedOptions) {
+      console.log(updatedOptions);
+      that.save(callback, updatedOptions);
+    }).showScreenShotModal();
   },
-  
+
   save: function (callback, options) {
     const format = (options.format || 'png').toLowerCase();
     options.filename = options.filename || 'screenshot_' + Math.round((+(new Date()) + Math.random()));
@@ -25,7 +27,7 @@ module.exports = {
       callback && callback(error);
     }, 'Screenshot', 'saveScreenshot', [options]);
   },
-  
+
   URI: function (callback, options) {
     options.quality = typeof (options.quality) !== 'number' ? 100 : options.quality;
     exec(function (res) {

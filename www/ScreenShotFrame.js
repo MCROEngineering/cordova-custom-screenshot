@@ -1,5 +1,5 @@
 module.exports = {
-  getFrame: function (callback, options) {
+  getFrame: function (options, callback) {
     if (!options || typeof options !== 'object') {
       console.error('Plugin: options needs to be an object of type {width, height, x, y} and it is mandatory');
     }
