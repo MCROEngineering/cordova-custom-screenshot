@@ -35,16 +35,10 @@ CGFloat statusBarHeight()
     UIGraphicsEndImageContext();
 
     // cut the status bar from the screenshot
-    CGRect smallRect = CGRectMake (imageFrame.origin.x, imageFrame.origin.y + statusBarHeight()*img.scale, imageFrame.size.width*img.scale, imageFrame.size.height * img.scale);
+    CGRect smallRect = CGRectMake (imageFrame.origin.x * img.scale, imageFrame.origin.y * img.scale + statusBarHeight() * img.scale, imageFrame.size.width * img.scale, imageFrame.size.height * img.scale);
 
     CGImageRef subImageRef = CGImageCreateWithImageInRect(img.CGImage, smallRect);
-    CGRect smallBounds = CGRectMake(0,0,CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
-
-    UIGraphicsBeginImageContext(smallBounds.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextDrawImage(context,smallBounds,subImageRef);
     UIImage* cropped = [UIImage imageWithCGImage:subImageRef];
-    UIGraphicsEndImageContext();
 
     CGImageRelease(subImageRef);
 
@@ -64,7 +58,7 @@ CGFloat statusBarHeight()
         CGFloat heightFrame = [[imageFrame objectForKey:@"height"] floatValue];
         CGFloat xOffset = [[imageFrame objectForKey:@"x"] floatValue];
         CGFloat yOffset = [[imageFrame objectForKey:@"y"] floatValue];
-        
+
         imageRect = CGRectMake(xOffset, yOffset, widthFrame, heightFrame);
     } else {
         imageRect = [self getDefaultFrame];
@@ -102,7 +96,7 @@ CGFloat statusBarHeight()
         CGFloat heightFrame = [[imageFrame objectForKey:@"height"] floatValue];
         CGFloat xOffset = [[imageFrame objectForKey:@"x"] floatValue];
         CGFloat yOffset = [[imageFrame objectForKey:@"y"] floatValue];
-        
+
         imageRect = CGRectMake(xOffset, yOffset, widthFrame, heightFrame);
     } else {
         imageRect = [self getDefaultFrame];
