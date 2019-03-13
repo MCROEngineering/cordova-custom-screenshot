@@ -5,8 +5,6 @@ module.exports = {
     }
     const width = options.width || 200;
     const height = options.height || 200;
-    const x = options.x || 0;
-    const y = options.y || 0;
     const fileName = options.fileName || 'screenshotName' + parseInt(Math.random() * 1000, 10);
 
     const modalId = 'screenshot-modal';
@@ -14,8 +12,8 @@ module.exports = {
     const heightFrame = height;
     const quality = options.quality || 100;
 
-    let xOffset = x || 50;
-    let yOffset = y || 50;
+    let xOffset = options.x || 50;
+    let yOffset = options.y || 50;
 
     return {
 
