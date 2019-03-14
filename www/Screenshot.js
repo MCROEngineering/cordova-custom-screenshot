@@ -14,6 +14,11 @@ module.exports = {
         return callback && callback(new Error('invalid format ' + format));
       }
       updatedOptions.quality = typeof (updatedOptions.quality) !== 'number' ? 100 : updatedOptions.quality;
+
+      if (options.onSnapStart) {
+        options.onSnapStart();
+      }
+
       exec(function (res) {
         callback && callback(null, res);
       }, function (error) {
@@ -25,6 +30,11 @@ module.exports = {
   getBase64: function (options, callback) {
     return ScreenShotFrame.getFrame(options, (updatedOptions) => {
       updatedOptions.quality = typeof (updatedOptions.quality) !== 'number' ? 100 : updatedOptions.quality;
+
+      if (options.onSnapStart) {
+        options.onSnapStart();
+      }
+
       exec(function (res) {
         callback && callback(null, res);
       }, function (error) {
