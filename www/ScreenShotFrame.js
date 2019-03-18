@@ -93,6 +93,7 @@ module.exports = {
 
 
         closeLink.onclick = this.closeScreenShotModal.bind(this);
+        modalElement.onclick = this.closeScreenShotModal.bind(this);
         snapButton.onclick = this.takeASnap.bind(this);
 
 
