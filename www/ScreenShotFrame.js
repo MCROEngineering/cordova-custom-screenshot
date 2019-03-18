@@ -1,5 +1,12 @@
+var isOpen = false;
+
 module.exports = {
   getFrame: function (options, callback) {
+    if (isOpen) {
+      return;
+    }
+    isOpen = true;
+
     if (!options || typeof options !== 'object') {
       console.error('Plugin: options needs to be an object of type {width, height, x, y} and it is mandatory');
     }
@@ -136,6 +143,7 @@ module.exports = {
         }, 0);
       },
       closeScreenShotModal: function () {
+        isOpen = false;
         const modal = document.getElementById(modalId);
         if (modal instanceof HTMLElement) {
           document.body.removeChild(modal);
