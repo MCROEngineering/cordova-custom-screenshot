@@ -18,13 +18,13 @@ module.exports = {
     const widthFrame = width;
     const heightFrame = height;
     const quality = options.quality || 100;
+    const resizable = options.resizable;
 
     let xOffset = options.x || 50;
     let yOffset = options.y || 50;
 
     return {
-
-      showScreenShotModal: function (overrideModalStyle, snapStyle, closeStyle) {
+      showScreenShotModal: function (styles) {
         const modalStyle = Object.assign({
           position: 'absolute',
           backgroundColor: '#000000',
@@ -33,15 +33,15 @@ module.exports = {
           bottom: 0,
           left: 0,
           right: 0,
-        }, overrideModalStyle || {});
-        const closeLinkStyle = {
+        }, styles.modalStyle || {});
+        const closeLinkStyle = Object.assign({
           position: 'absolute',
           color: '#fff',
           top: '20px',
           right: '20px',
           fontSize: '16px',
           cursor: 'pointer',
-        };
+        }, styles.closeLinkStyle || {});
         const resizableAreaStyle = {
           position: 'relative',
           display: 'flex',
@@ -61,7 +61,8 @@ module.exports = {
           cursor: 'pointer',
           textAlign: 'center',
           fontSize: '20px',
-        }, snapStyle || {});
+        }, styles.snapStyle || {});
+
         const modalElement = document.createElement('div');
         const closeLink = document.createElement('a');
         const resizableArea = document.createElement('div');
@@ -75,13 +76,14 @@ module.exports = {
         const bottomRight = document.createElement('div');
         bottomRight.style.cssText = 'background-color: #ff0; position: absolute; height: 10%; width: 10%; bottom: 0; right: 0;';
 
-        const snapButton = document.createElement('a');
+        const snapButton = document.createElement('span');
         snapButton.id = 'snapButtonLink';
-        snapButton.appendChild(document.createTextNode(snapStyle ? snapStyle.text || 'Take a Snap' : 'Take a Snap'));
+        const snapButtonText = document.createTextNode(styles.snapStyle ? styles.snapStyle.text || 'Take a Snap' : 'Take a Snap');
+
+        snapButton.appendChild(snapButtonText);
         Object.keys(snapButtonStyle).forEach(function (prop) {
           snapButton.style[prop] = snapButtonStyle[prop];
         });
-
 
         modalElement.id = modalId;
 
@@ -89,7 +91,7 @@ module.exports = {
           modalElement.style[prop] = modalStyle[prop];
         });
 
-        closeLink.appendChild(document.createTextNode(closeStyle ? closeStyle.text || 'X' : 'X'));
+        closeLink.appendChild(document.createTextNode(styles.closeStyle ? styles.closeStyle.text || 'X' : 'X'));
         Object.keys(closeLinkStyle).forEach(function (prop) {
           closeLink.style[prop] = closeLinkStyle[prop];
         });
@@ -111,10 +113,12 @@ module.exports = {
         resizableArea.addEventListener('touchleave', this.handleResizableEnd.bind(this), false);
         resizableArea.addEventListener('touchmove', this.handleResizableMove.bind(this), false);
 
-        resizableArea.appendChild(topLeft);
-        resizableArea.appendChild(topRight);
-        resizableArea.appendChild(bottomLeft);
-        resizableArea.appendChild(bottomRight);
+        if (resizable) {
+          resizableArea.appendChild(topLeft);
+          resizableArea.appendChild(topRight);
+          resizableArea.appendChild(bottomLeft);
+          resizableArea.appendChild(bottomRight);
+        }
         resizableArea.appendChild(snapButton);
         resizableArea.id = 'resizableArea';
         this.resizableArea = resizableArea;
