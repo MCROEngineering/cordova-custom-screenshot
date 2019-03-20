@@ -18,7 +18,8 @@ module.exports = {
     const widthFrame = width;
     const heightFrame = height;
     const quality = options.quality || 100;
-    const resizable = options.resizable;
+    const resizeEnabled = options.resizeEnabled;
+    const translateEnabled = options.translateEnabled;
 
     let xOffset = options.x || 50;
     let yOffset = options.y || 50;
@@ -113,7 +114,7 @@ module.exports = {
         resizableArea.addEventListener('touchleave', this.handleResizableEnd.bind(this), false);
         resizableArea.addEventListener('touchmove', this.handleResizableMove.bind(this), false);
 
-        if (resizable) {
+        if (resizeEnabled) {
           resizableArea.appendChild(topLeft);
           resizableArea.appendChild(topRight);
           resizableArea.appendChild(bottomLeft);
@@ -125,6 +126,12 @@ module.exports = {
         // add elements to dom
         modalElement.appendChild(closeLink);
         modalElement.appendChild(resizableArea);
+
+        if (!translateEnabled) {
+          modalElement.style.pointerEvents = 'none';
+          snapButton.style.pointerEvents = 'all';
+        }
+
         document.body.appendChild(modalElement);
       },
       takeASnap: function (e) {
