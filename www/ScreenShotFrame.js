@@ -43,14 +43,14 @@ module.exports = {
           fontSize: '16px',
           cursor: 'pointer',
         }, styles.closeLinkStyle || {});
-        const resizableAreaStyle = {
+        const resizableAreaStyle = Object.assign({
           position: 'relative',
           display: 'flex',
           width: `${widthFrame}px`,
           height: `${heightFrame}px`,
           backgroundColor: '#fff',
           transform: `translate3d(${xOffset}px, ${yOffset}px, 0)`,
-        };
+        }, styles.resizableAreaStyle || {});
         const snapButtonStyle = Object.assign({
           position: 'relative',
           display: 'block',

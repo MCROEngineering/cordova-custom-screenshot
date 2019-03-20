@@ -11,6 +11,7 @@ const getOverrideStyles = function (options) {
     snapStyle: options.snapStyle || {},
     closeLinkStyle: options.closeLinkStyle || {},
     resizeCornersStyle: options.resizeCornersStyle || {},
+    resizableAreaStyle: options.resizableAreaStyle || {}
   });
 };
 
@@ -30,6 +31,14 @@ module.exports = {
         options.onSnapStart();
       }
 
+      if (!options.translateEnabled) {
+        updatedOptions.frame = {
+          ...updatedOptions.frame,
+          x: (window.innerWidth - updatedOptions.frame.width) / 2,
+          y: (window.innerHeight - updatedOptions.frame.height) / 2,
+        }
+      }
+
       exec(function (res) {
         callback && callback(null, res);
       }, function (error) {
@@ -46,6 +55,14 @@ module.exports = {
 
       if (options.onSnapStart) {
         options.onSnapStart();
+      }
+
+      if (!options.translateEnabled) {
+        updatedOptions.frame = {
+          ...updatedOptions.frame,
+          x: (window.innerWidth - updatedOptions.frame.width) / 2,
+          y: (window.innerHeight - updatedOptions.frame.height) / 2,
+        }
       }
 
       exec(function (res) {
