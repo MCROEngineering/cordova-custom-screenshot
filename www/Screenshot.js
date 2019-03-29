@@ -18,19 +18,19 @@ const getOverrideStyles = function (options) {
 module.exports = {
   save: function (options, callback) {
     const styles = getOverrideStyles(options);
-
-    return ScreenShotFrame.getFrame(options, (updatedOptions) => {
+    
+    const frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
       const format = (options.format || 'png').toLowerCase();
       updatedOptions.filename = updatedOptions.filename || 'screenshot_' + Math.round((+(new Date()) + Math.random()));
       if (formats.indexOf(format) === -1) {
         return callback && callback(new Error('invalid format ' + format));
       }
       updatedOptions.quality = typeof (updatedOptions.quality) !== 'number' ? 100 : updatedOptions.quality;
-
+      
       if (options.onSnapStart) {
         options.onSnapStart();
       }
-
+      
       if (!options.translateEnabled) {
         updatedOptions.frame = {
           ...updatedOptions.frame,
@@ -38,25 +38,28 @@ module.exports = {
           y: (window.innerHeight - updatedOptions.frame.height) / 2,
         }
       }
-
+      
       exec(function (res) {
         callback && callback(null, res);
       }, function (error) {
         callback && callback(error);
       }, 'Screenshot', 'saveScreenshot', [updatedOptions]);
-    }).showScreenShotModal(styles);
+    });
+    frame.showScreenShotModal(styles);
+    
+    return frame;
   },
-
+  
   getBase64: function (options, callback) {
     const styles = getOverrideStyles(options);
-
-    return ScreenShotFrame.getFrame(options, (updatedOptions) => {
+    
+    const frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
       updatedOptions.quality = typeof (updatedOptions.quality) !== 'number' ? 100 : updatedOptions.quality;
-
+      
       if (options.onSnapStart) {
         options.onSnapStart();
       }
-
+      
       if (!options.translateEnabled) {
         updatedOptions.frame = {
           ...updatedOptions.frame,
@@ -64,12 +67,15 @@ module.exports = {
           y: (window.innerHeight - updatedOptions.frame.height) / 2,
         }
       }
-
+      
       exec(function (res) {
         callback && callback(null, res);
       }, function (error) {
         callback && callback(error);
       }, 'Screenshot', 'getScreenshotAsURI', [updatedOptions]);
-    }).showScreenShotModal(styles);
+    });
+    
+    frame.showScreenShotModal(styles);
+    return frame;
   }
 };
