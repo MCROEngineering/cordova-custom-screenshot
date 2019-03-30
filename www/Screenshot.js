@@ -15,11 +15,17 @@ const getOverrideStyles = function (options) {
   });
 };
 
+let frame;
+
 module.exports = {
   save: function (options, callback) {
     const styles = getOverrideStyles(options);
-    
-    const frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
+  
+    if (frame) {
+      frame.closeScreenShotModal();
+      frame = undefined;
+    }
+    frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
       const format = (options.format || 'png').toLowerCase();
       updatedOptions.filename = updatedOptions.filename || 'screenshot_' + Math.round((+(new Date()) + Math.random()));
       if (formats.indexOf(format) === -1) {
@@ -46,14 +52,15 @@ module.exports = {
       }, 'Screenshot', 'saveScreenshot', [updatedOptions]);
     });
     frame.showScreenShotModal(styles);
-    
-    return frame;
   },
   
   getBase64: function (options, callback) {
     const styles = getOverrideStyles(options);
-    
-    const frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
+    if (frame) {
+      frame.closeScreenShotModal();
+      frame = undefined;
+    }
+    frame = ScreenShotFrame.getFrame(options, (updatedOptions) => {
       updatedOptions.quality = typeof (updatedOptions.quality) !== 'number' ? 100 : updatedOptions.quality;
       
       if (options.onSnapStart) {
@@ -76,6 +83,15 @@ module.exports = {
     });
     
     frame.showScreenShotModal(styles);
-    return frame;
+  },
+  
+  closeFrame: function () {
+    if (frame) {
+      frame.closeScreenShotModal();
+      frame = undefined;
+    } else {
+      console.log('CORDOVA SCREENSHOT: no frame rendered to be closed');
+    }
   }
+  
 };

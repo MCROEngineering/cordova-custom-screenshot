@@ -1,6 +1,6 @@
 {
   "name": "cordova-custom-screenshot",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Screenshot custom for Crodova & Phonegap",
   "cordova": {
     "id": "cordova-custom-screenshot",
