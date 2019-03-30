@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin
-        id="cordova-custom-screenshot"
-        version="0.0.9"
-        xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>Custom Screenshot</name>
-    <description>Custom Screenshot Tool for Corodova and Phonegap</description>
+<plugin id="cordova-custom-screenshot" version="0.0.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-custom-screenshot</name>
+    <description>Screenshot custom for Crodova &amp; Phonegap</description>
     <license>MIT</license>
-    <keywords>cordova,screenshot, custom screenshot, ecosystem:cordova,cordova-android,cordova-ios</keywords>
+    <keywords>cordova,screenshot,custom-screenshot,ecosystem:cordova,cordova-android,cordova-ios,phonegap</keywords>
     <repo>git+https://github.com/MCROEngineering/cordova-custom-screenshot.git</repo>
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
@@ -44,5 +40,5 @@
     </platform>
 
     <issue>https://github.com/MCROEngineering/cordova-custom-screenshot/issues</issue>
-    <author>MCRO ENGINEERING</author>
+    <author>MCRO</author>
 </plugin>
