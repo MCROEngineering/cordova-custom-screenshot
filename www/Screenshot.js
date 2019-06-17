@@ -52,6 +52,10 @@ module.exports = {
       }, 'Screenshot', 'saveScreenshot', [updatedOptions]);
     });
     frame.showScreenShotModal(styles);
+
+    if (options.onDisplayed) {
+      options.onDisplayed(frame);
+    }
   },
   
   getBase64: function (options, callback) {
